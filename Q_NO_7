@@ -1,0 +1,17 @@
+def count_remaining_words(sequence):
+    stack = []
+
+    for word in sequence:
+        if not stack or word != stack[-1]:
+            stack.append(word)
+        else:
+            stack.pop()
+
+    return len(stack)
+
+# Testing the function
+sequence1 = ["ab", "aa", "aa", "bcd", "ab"]
+print(count_remaining_words(sequence1))  # Output: 3
+
+sequence2 = ["tom", "jerry", "jerry", "tom"]
+print(count_remaining_words(sequence2))  # Output: 0
