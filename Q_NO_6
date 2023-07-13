@@ -1,0 +1,32 @@
+from queue import Queue
+
+
+def reverse_k_elements(queue, k):
+    if k < 0 or k > queue.qsize():
+        return "Invalid k"
+
+    stack = []
+    for _ in range(k):
+        stack.append(queue.get())
+
+    while stack:
+        queue.put(stack.pop())
+
+    for _ in range(queue.qsize() - k):
+        queue.put(queue.get())
+
+    return queue
+
+
+# Testing the function
+q = Queue()
+q.put(1)
+q.put(2)
+q.put(3)
+q.put(4)
+q.put(5)
+
+reversed_queue = reverse_k_elements(q, 3)
+while not reversed_queue.empty():
+    print(reversed_queue.get(), end=" ")
+# Output: 3 2 1 4 5
