@@ -1,0 +1,30 @@
+def reverse_number(number):
+    stack = []
+
+    # Push each digit of the number onto the stack
+    while number != 0:
+        digit = number % 10
+        stack.append(digit)
+        number //= 10
+
+    reversed_number = 0
+    multiplier = 1
+
+    # Pop each digit from the stack and construct the reversed number
+    while stack:
+        digit = stack.pop()
+        reversed_number += digit * multiplier
+        multiplier *= 10
+
+    return reversed_number
+number1 = 12345
+print(reverse_number(number1))  # Output: 54321
+
+number2 = 987654321
+print(reverse_number(number2))  # Output: 123456789
+
+number3 = 100
+print(reverse_number(number3))  # Output: 1
+
+number4 = 0
+print(reverse_number(number4))  # Output: 0
