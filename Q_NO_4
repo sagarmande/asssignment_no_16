@@ -1,0 +1,55 @@
+from queue import Queue
+
+
+def check_queue_order(given_queue):
+    stack = []
+    second_queue = Queue()
+    expected = 1
+
+    while not given_queue.empty():
+        if given_queue.queue[0] == expected:
+            given_queue.get()
+            expected += 1
+        elif stack and stack[-1] == expected:
+            stack.pop()
+            second_queue.put(expected)
+            expected += 1
+        else:
+            stack.append(given_queue.get())
+
+    while stack:
+        if stack[-1] == expected:
+            stack.pop()
+            second_queue.put(expected)
+            expected += 1
+        else:
+            return "No"
+
+    while not given_queue.empty():
+        second_queue.put(given_queue.get())
+
+    while not second_queue.empty():
+        if second_queue.get() != expected:
+            return "No"
+        expected += 1
+
+    return "Yes"
+
+
+
+queue1 = Queue()
+queue1.put(5)
+queue1.put(1)
+queue1.put(2)
+queue1.put(3)
+queue1.put(4)
+print(check_queue_order(queue1))  # Output: Yes
+
+queue2 = Queue()
+queue2.put(5)
+queue2.put(1)
+queue2.put(2)
+queue2.put(6)
+queue2.put(3)
+queue2.put(4)
+print(check_queue_order(queue2))  # Output: No
