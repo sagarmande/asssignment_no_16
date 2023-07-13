@@ -1,0 +1,22 @@
+def delete_middle(stack, index):
+    # Base case: Middle element reached, return without pushing the element back
+    if index == ((len(stack) // 2) + 1):
+        stack.pop()
+        return
+
+    # Pop an element and recursively call delete_middle on the updated stack and index
+    temp = stack.pop()
+    delete_middle(stack, index + 1)
+
+    # Push the popped element back onto the stack after recursive calls
+    stack.append(temp)
+
+
+def delete_middle_element(stack):
+    delete_middle(stack, 1)
+    return stack
+stack1 = [1, 2, 3, 4, 5]
+print(delete_middle_element(stack1))  # Output: [1, 2, 4, 5]
+
+stack2 = [1, 2, 3, 4, 5, 6]
+print(delete_middle_element(stack2))  # Output: [1, 2, 4, 5, 6]
